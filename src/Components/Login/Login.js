@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Login.scss";
 import { useHistory } from "react-router-dom";
+// import { toast } from "react-toastify";
 const Login = () => {
   let history = useHistory();
   const handleCreateNewAccount = () => {
     history.push("/register");
   };
+  useEffect(() => {}, []);
   return (
     <div className="container p-5 mt-5">
       <div className="row login-container ">
