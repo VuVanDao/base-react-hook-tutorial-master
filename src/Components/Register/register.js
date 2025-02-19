@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./register.scss";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { handleCreateUser } from "../../Services/userService";
 const Register = () => {
   let history = useHistory();
   let [email, setEmail] = useState("");
@@ -113,14 +113,14 @@ const Register = () => {
     if (check === false) {
       console.log("error");
     } else {
-      let result = await axios.post("http://localhost:8080/api/v1/create", {
+      let result = await handleCreateUser(
         email,
         Address,
         phoneNumber,
         username,
-        password,
-      });
-      if (result.data.errCode === 0) {
+        password
+      );
+      if (+result.data.errCode === 0) {
         toast.success(result.data.errMessage);
         setEmail("");
         setAddress("");
@@ -128,7 +128,7 @@ const Register = () => {
         setUsername("");
         setPassword("");
         setConfirmPassword("");
-      } else if (result.data.errCode === 2) {
+      } else if (+result.data.errCode === 2) {
         toast.info(result.data.errMessage);
       }
     }
