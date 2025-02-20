@@ -4,15 +4,26 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Register from "./Components/Register/register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useState } from "react";
+import _ from "lodash";
+import HomePage from "./Components/HomePage/HomePage";
 function App() {
+  let [account, setAccount] = useState({});
+  // useEffect(() => {
+  //   let session = sessionStorage.getItem("account");
+  //   if (session) {
+  //     setAccount(JSON.parse(session));
+  //   }
+  // }, [account]);
+
   return (
     <div style={{ backgroundColor: "#f2f4f7", minHeight: "100vh" }}>
       <Router>
-        <Nav />
+        {/* {account && !_.isEmpty(account) && account.isAuthenticated && <Nav />} */}
         {/* <marquee>Welcome to my personal project (❁´◡`❁)</marquee> */}
         <Switch>
-          <Route path="/home" exact>
-            HomePage
+          <Route path="/" exact>
+            <HomePage />
           </Route>
           <Route path="/user">User</Route>
           <Route path="/login">

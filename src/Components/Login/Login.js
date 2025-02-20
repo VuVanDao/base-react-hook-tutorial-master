@@ -3,7 +3,6 @@ import "./Login.scss";
 import { useHistory } from "react-router-dom";
 import { handleLogin } from "../../Services/userService";
 import { toast } from "react-toastify";
-// import { toast } from "react-toastify";
 const Login = () => {
   let history = useHistory();
   let [email, setEmail] = useState("");
@@ -11,7 +10,9 @@ const Login = () => {
 
   let [errorEmail, setErrorEmail] = useState("");
   let [errorPassword, setErrorPassword] = useState("");
-
+  useEffect(() => {
+    sessionStorage.removeItem("account");
+  }, []);
   const handleCreateNewAccount = () => {
     history.push("/register");
   };
@@ -59,6 +60,12 @@ const Login = () => {
         toast.success(result.data.errMessage);
         setEmail("");
         setPassword("");
+        let data = {
+          isAuthenticated: true,
+          token: "fake token",
+        };
+        sessionStorage.setItem("account", JSON.stringify(data));
+        history.push("/");
       } else if (+result.data.errCode === -1) {
         toast.info(result.data.errMessage);
       }
@@ -66,8 +73,8 @@ const Login = () => {
   };
   useEffect(() => {}, []);
   return (
-    <div className="container p-5 mt-5">
-      <div className="row login-container ">
+    <div className="container p-5 ">
+      <div className="row login-container">
         <div className="left col-7 d-none d-md-block p-3">
           <div className="title">VanDao: login</div>
           <div className="text">Personal Project</div>
@@ -95,6 +102,11 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => handleOnChange(e.target.value, "password")}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                handleLoginAccount();
+              }
+            }}
           />
           <span style={{ color: "red" }}>{errorPassword}</span>
 
