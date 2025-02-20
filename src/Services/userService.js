@@ -15,4 +15,10 @@ const handleCreateUser = async (
     password,
   });
 };
-export { handleCreateUser };
+const handleLogin = async (email, password) => {
+  return await axios.post("http://localhost:8080/api/v1/login", {
+    email,
+    password,
+  });
+};
+export { handleCreateUser, handleLogin };
