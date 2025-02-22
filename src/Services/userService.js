@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const handleCreateUser = async (
+const handleCreateAccountApi = async (
   email,
   Address,
   phoneNumber,
   username,
   password
 ) => {
-  return await axios.post("http://localhost:8080/api/v1/create", {
+  return await axios.post("http://localhost:8080/api/v1/create-account", {
     email,
     Address,
     phoneNumber,
@@ -21,6 +21,9 @@ const handleLogin = async (email, password) => {
     password,
   });
 };
+const GetDetailUser = async (id) => {
+  return await axios.get(`http://localhost:8080/api/v1/get-detail?id=${id}`);
+};
 const GetAllUser = async (page, limit) => {
   return await axios.get(
     `http://localhost:8080/api/v1/get?page=${page}&limit=${limit}`
@@ -29,4 +32,34 @@ const GetAllUser = async (page, limit) => {
 const DeleteUser = async (id) => {
   return await axios.delete(`http://localhost:8080/api/v1/delete/${id}`);
 };
-export { handleCreateUser, handleLogin, GetAllUser, DeleteUser };
+const handleCreateUserApi = async (
+  email,
+  address,
+  phone,
+  username,
+  password,
+  gender,
+  group
+) => {
+  return await axios.post("http://localhost:8080/api/v1/post", {
+    email,
+    address,
+    phone,
+    username,
+    password,
+    gender,
+    group,
+  });
+};
+const getGroup = async (id) => {
+  return await axios.get(`http://localhost:8080/api/v1/get-group`);
+};
+export {
+  handleCreateAccountApi,
+  handleLogin,
+  GetAllUser,
+  DeleteUser,
+  GetDetailUser,
+  handleCreateUserApi,
+  getGroup,
+};

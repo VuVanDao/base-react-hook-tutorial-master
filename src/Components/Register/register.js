@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./register.scss";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { handleCreateUser } from "../../Services/userService";
+import { handleCreateAccountApi } from "../../Services/userService";
 const Register = () => {
   let history = useHistory();
   let [email, setEmail] = useState("");
@@ -113,7 +113,7 @@ const Register = () => {
     if (check === false) {
       console.log("error");
     } else {
-      let result = await handleCreateUser(
+      let result = await handleCreateAccountApi(
         email,
         Address,
         phoneNumber,
@@ -128,6 +128,7 @@ const Register = () => {
         setUsername("");
         setPassword("");
         setConfirmPassword("");
+        history.push("/login");
       } else if (+result.data.errCode === 2) {
         toast.info(result.data.errMessage);
       }
