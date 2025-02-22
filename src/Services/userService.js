@@ -54,6 +54,23 @@ const handleCreateUserApi = async (
 const getGroup = async (id) => {
   return await axios.get(`http://localhost:8080/api/v1/get-group`);
 };
+const handleUpdateUserApi = async (
+  id,
+  address,
+  phone,
+  username,
+  gender,
+  groupId
+) => {
+  return await axios.put("http://localhost:8080/api/v1/put", {
+    id,
+    address,
+    phone,
+    username,
+    gender,
+    groupId,
+  });
+};
 export {
   handleCreateAccountApi,
   handleLogin,
@@ -62,4 +79,5 @@ export {
   GetDetailUser,
   handleCreateUserApi,
   getGroup,
+  handleUpdateUserApi,
 };

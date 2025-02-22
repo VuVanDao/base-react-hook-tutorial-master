@@ -4,6 +4,7 @@ import { GetAllUser } from "../../Services/userService";
 import ReactPaginate from "react-paginate";
 import ModalCreateUser from "../Modal/ModalCreateUser";
 import ModalDeleteUser from "../Modal/ModalDeleteUser";
+import ModalUpdateUser from "../Modal/ModalUpdateUser";
 const User = () => {
   let [listUser, setListUser] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
@@ -11,7 +12,9 @@ const User = () => {
   let [totalPages, setTotalPages] = useState(0);
   let [isShowModalCreateUser, setIsShowModalCreateUser] = useState(false);
   let [isShowModalDeleteUser, setIsShowModalDeleteUser] = useState(false);
+  let [isShowModalUpdateUser, setIsShowModalUpdateUser] = useState(false);
   let [deleteUserId, setDeleteUserId] = useState(0);
+  let [updateUserId, setUpdateUserId] = useState(0);
   useEffect(() => {
     fetchListUser();
   }, [currentPage]);
@@ -24,6 +27,8 @@ const User = () => {
   };
   const handleUpdateUser = (id) => {
     console.log("id", id);
+    setIsShowModalUpdateUser(!isShowModalDeleteUser);
+    setUpdateUserId(id);
   };
   const handleDeleteUser = async (id) => {
     setIsShowModalDeleteUser(!isShowModalDeleteUser);
@@ -144,6 +149,12 @@ const User = () => {
         isShowModalDeleteUser={isShowModalDeleteUser}
         setIsShowModalDeleteUser={setIsShowModalDeleteUser}
         deleteUserId={deleteUserId}
+        fetchListUser={fetchListUser}
+      />
+      <ModalUpdateUser
+        isShowModalUpdateUser={isShowModalUpdateUser}
+        setIsShowModalUpdateUser={setIsShowModalUpdateUser}
+        updateUserId={updateUserId}
         fetchListUser={fetchListUser}
       />
     </>
