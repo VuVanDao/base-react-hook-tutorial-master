@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import "font-awesome/css/font-awesome.min.css";
 import AppRouters from "./routers/AppRouters";
 function App() {
   return (

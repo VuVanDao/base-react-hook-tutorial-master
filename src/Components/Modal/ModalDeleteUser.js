@@ -21,18 +21,18 @@ const ModalDeleteUser = (props) => {
   }, [isShowModalDeleteUser]);
   const handleGetDetailUser = async () => {
     let result = await GetDetailUser(deleteUserId);
-    if (result.data.errCode === 0 && result.data.data) {
-      setDetailUser(result.data.data);
+    if (result.errCode === 0 && result.data) {
+      setDetailUser(result.data);
     }
   };
   const handleDeleteUser = async () => {
     let result = await DeleteUser(deleteUserId);
-    if (result.data.errCode === 0) {
-      toast.success(result.data.errMessage);
+    if (result.errCode === 0) {
+      toast.success(result.errMessage);
       fetchListUser();
       handleClose();
     } else {
-      toast.error(result.data.errMessage);
+      toast.error(result.errMessage);
     }
   };
   return (

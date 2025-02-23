@@ -20,13 +20,13 @@ const User = () => {
   }, [currentPage]);
   const fetchListUser = async () => {
     let result = await GetAllUser(currentPage, currentLimit);
-    if (result.data.errCode === 0 && result.data.data.users.length > 0) {
-      setTotalPages(result.data.data.totalPage);
-      setListUser(result.data.data.users);
+
+    if (result.errCode === 0 && result.data.users.length > 0) {
+      setTotalPages(result.data.totalPage);
+      setListUser(result.data.users);
     }
   };
   const handleUpdateUser = (id) => {
-    console.log("id", id);
     setIsShowModalUpdateUser(!isShowModalDeleteUser);
     setUpdateUserId(id);
   };
@@ -44,10 +44,18 @@ const User = () => {
       <div className="container mt-5">
         <div className="mb-5">
           <button
+            className="btn btn-outline-success mx-2"
+            onClick={() => fetchListUser()}
+          >
+            <i className="fa fa-refresh"></i>
+            <span>refresh</span>
+          </button>
+          <button
             className="btn btn-outline-primary"
             onClick={() => setIsShowModalCreateUser(!isShowModalCreateUser)}
           >
-            Create user
+            <i className="fa fa-plus-square-o"></i>
+            <span> Create user</span>
           </button>
         </div>
         <table className="table">
@@ -58,34 +66,45 @@ const User = () => {
               <th scope="col">Email</th>
               <th scope="col">Address</th>
               <th scope="col">Phone</th>
+              <th scope="col">Group</th>
+              <th scope="col">Gender</th>
             </tr>
           </thead>
           <tbody>
             {listUser &&
               listUser.length > 0 &&
-              listUser.map(({ id, username, email, address, phone }, index) => (
-                <tr key={`user-${index}`}>
-                  <th scope="row">{id}</th>
-                  <td>{username}</td>
-                  <td>{email}</td>
-                  <td>{address}</td>
-                  <td>{phone}</td>
-                  <td style={{ display: "flex", gap: "10px" }}>
-                    <button
-                      className=" btn btn-primary"
-                      onClick={() => handleUpdateUser(id)}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className=" btn btn-warning"
-                      onClick={() => handleDeleteUser(id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              listUser.map(
+                (
+                  { id, username, email, address, phone, Group, gender },
+                  index
+                ) => (
+                  <tr key={`user-${index}`}>
+                    <th scope="row">{id}</th>
+                    <td>{username}</td>
+                    <td>{email}</td>
+                    <td>{address}</td>
+                    <td>{phone}</td>
+                    <td>{Group.name}</td>
+                    <td>{gender}</td>
+                    <td style={{ display: "flex", gap: "10px" }}>
+                      <button
+                        className=" btn btn-primary"
+                        onClick={() => handleUpdateUser(id)}
+                      >
+                        <i className="fa fa-pencil-square-o"></i>
+                        <span>Update</span>
+                      </button>
+                      <button
+                        className=" btn btn-warning"
+                        onClick={() => handleDeleteUser(id)}
+                      >
+                        <i className="fa fa-trash-o"></i>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                )
+              )}
           </tbody>
         </table>
         {/* <nav aria-label="Page navigation example">

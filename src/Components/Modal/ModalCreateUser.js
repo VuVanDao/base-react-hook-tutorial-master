@@ -26,12 +26,8 @@ const ModalCreateUser = (props) => {
   }, []);
   const handleGetGroup = async () => {
     let result = await getGroup();
-    if (
-      result.data.errCode === 0 &&
-      result.data.data &&
-      result.data.data.length > 0
-    ) {
-      setListGroup(result.data.data);
+    if (result.errCode === 0 && result.data && result.data.length > 0) {
+      setListGroup(result.data);
     }
   };
   const handleClose = () => {
@@ -143,11 +139,11 @@ const ModalCreateUser = (props) => {
         gender ? gender : 1,
         group ? group : 3
       );
-      if (+result.data.errCode === 0) {
-        toast.success(result.data.errMessage);
+      if (+result.errCode === 0) {
+        toast.success(result.errMessage);
         handleClose();
-      } else if (+result.data.errCode === 2) {
-        toast.info(result.data.errMessage);
+      } else if (+result.errCode === 2) {
+        toast.info(result.errMessage);
       }
     }
   };

@@ -1,5 +1,5 @@
-import axios from "axios";
-
+// import axios from "axios";
+import axios from "../setup/customAxios";
 const handleCreateAccountApi = async (
   email,
   Address,
@@ -7,7 +7,7 @@ const handleCreateAccountApi = async (
   username,
   password
 ) => {
-  return await axios.post("http://localhost:8080/api/v1/create-account", {
+  return await axios.post("/api/v1/create-account", {
     email,
     Address,
     phoneNumber,
@@ -16,21 +16,19 @@ const handleCreateAccountApi = async (
   });
 };
 const handleLogin = async (email, password) => {
-  return await axios.post("http://localhost:8080/api/v1/login", {
+  return await axios.post("/api/v1/login", {
     email,
     password,
   });
 };
 const GetDetailUser = async (id) => {
-  return await axios.get(`http://localhost:8080/api/v1/get-detail?id=${id}`);
+  return await axios.get(`/api/v1/get-detail?id=${id}`);
 };
 const GetAllUser = async (page, limit) => {
-  return await axios.get(
-    `http://localhost:8080/api/v1/get?page=${page}&limit=${limit}`
-  );
+  return await axios.get(`/api/v1/get?page=${page}&limit=${limit}`);
 };
 const DeleteUser = async (id) => {
-  return await axios.delete(`http://localhost:8080/api/v1/delete/${id}`);
+  return await axios.delete(`/api/v1/delete/${id}`);
 };
 const handleCreateUserApi = async (
   email,
@@ -41,7 +39,7 @@ const handleCreateUserApi = async (
   gender,
   group
 ) => {
-  return await axios.post("http://localhost:8080/api/v1/post", {
+  return await axios.post("/api/v1/post", {
     email,
     address,
     phone,
@@ -51,8 +49,8 @@ const handleCreateUserApi = async (
     group,
   });
 };
-const getGroup = async (id) => {
-  return await axios.get(`http://localhost:8080/api/v1/get-group`);
+const getGroup = async () => {
+  return await axios.get(`/api/v1/get-group`);
 };
 const handleUpdateUserApi = async (
   id,
@@ -62,7 +60,7 @@ const handleUpdateUserApi = async (
   gender,
   groupId
 ) => {
-  return await axios.put("http://localhost:8080/api/v1/put", {
+  return await axios.put("/api/v1/put", {
     id,
     address,
     phone,

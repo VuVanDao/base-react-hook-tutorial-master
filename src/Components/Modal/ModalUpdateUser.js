@@ -33,21 +33,17 @@ const ModalUpdateUser = (props) => {
   }, [isShowModalUpdateUser]);
   const handleGetGroup = async () => {
     let result = await getGroup();
-    if (
-      result.data.errCode === 0 &&
-      result.data.data &&
-      result.data.data.length > 0
-    ) {
-      setListGroup(result.data.data);
+    if (result.errCode === 0 && result.data && result.data.length > 0) {
+      setListGroup(result.data);
     }
   };
   const handleGetDetailUser = async () => {
     let result = await GetDetailUser(updateUserId);
-    if (result.data.errCode === 0 && result.data.data) {
-      setEmail(result.data.data.email);
-      setUsername(result.data.data.username);
-      setAddress(result.data.data.address);
-      setPhone(result.data.data.phone);
+    if (result.errCode === 0 && result.data) {
+      setEmail(result.data.email);
+      setUsername(result.data.username);
+      setAddress(result.data.address);
+      setPhone(result.data.phone);
     }
   };
   const handleOnChange = (value, id) => {

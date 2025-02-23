@@ -120,8 +120,8 @@ const Register = () => {
         username,
         password
       );
-      if (+result.data.errCode === 0) {
-        toast.success(result.data.errMessage);
+      if (+result.errCode === 0) {
+        toast.success(result.errMessage);
         setEmail("");
         setAddress("");
         setPhoneNumber("");
@@ -129,8 +129,8 @@ const Register = () => {
         setPassword("");
         setConfirmPassword("");
         history.push("/login");
-      } else if (+result.data.errCode === 2) {
-        toast.info(result.data.errMessage);
+      } else if (+result.errCode === 2) {
+        toast.info(result.errMessage);
       }
     }
   };

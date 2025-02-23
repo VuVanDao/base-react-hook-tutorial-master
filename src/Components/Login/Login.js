@@ -56,8 +56,8 @@ const Login = () => {
     let check = handleValidate();
     if (check) {
       const result = await handleLogin(email, password);
-      if (+result.data.errCode === 0) {
-        toast.success(result.data.errMessage);
+      if (+result.errCode === 0) {
+        toast.success(result.errMessage);
         setEmail("");
         setPassword("");
         let data = {
@@ -66,8 +66,8 @@ const Login = () => {
         };
         sessionStorage.setItem("account", JSON.stringify(data));
         history.push("/");
-      } else if (+result.data.errCode === -1) {
-        toast.info(result.data.errMessage);
+      } else if (+result.errCode === -1) {
+        toast.info(result.errMessage);
       }
     }
   };
