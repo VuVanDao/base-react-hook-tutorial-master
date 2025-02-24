@@ -4,7 +4,7 @@ const instance = axios.create({
   //   timeout: 1000,
   //   headers: { "X-Custom-Header": "foobar" },
 });
-// instance.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+instance.defaults.withCredentials = true;
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
