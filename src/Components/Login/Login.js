@@ -3,11 +3,13 @@ import "./Login.scss";
 import { useHistory } from "react-router-dom";
 import { handleLogin } from "../../Services/userService";
 import { toast } from "react-toastify";
+import { UserContext } from "../../Context/UserContext";
+
 const Login = () => {
+  const { loginContext } = React.useContext(UserContext);
   let history = useHistory();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-
   let [errorEmail, setErrorEmail] = useState("");
   let [errorPassword, setErrorPassword] = useState("");
   useEffect(() => {
@@ -63,7 +65,10 @@ const Login = () => {
         let data = {
           isAuthenticated: true,
           token: "fake token",
+          account: { ...result.account },
+          username: result.username,
         };
+        loginContext(data);
         sessionStorage.setItem("account", JSON.stringify(data));
         history.push("/");
       } else if (+result.errCode === -1) {

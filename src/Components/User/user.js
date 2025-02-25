@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import ModalCreateUser from "../Modal/ModalCreateUser";
 import ModalDeleteUser from "../Modal/ModalDeleteUser";
 import ModalUpdateUser from "../Modal/ModalUpdateUser";
+import { UserContext } from "../../Context/UserContext";
 const User = () => {
   let [listUser, setListUser] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
@@ -15,12 +16,13 @@ const User = () => {
   let [isShowModalUpdateUser, setIsShowModalUpdateUser] = useState(false);
   let [deleteUserId, setDeleteUserId] = useState(0);
   let [updateUserId, setUpdateUserId] = useState(0);
+  const { name } = React.useContext(UserContext);
   useEffect(() => {
     fetchListUser();
+    console.log("name:", name);
   }, [currentPage]);
   const fetchListUser = async () => {
     let result = await GetAllUser(currentPage, currentLimit);
-
     if (result.errCode === 0 && result.data.users.length > 0) {
       setTotalPages(result.data.totalPage);
       setListUser(result.data.users);
