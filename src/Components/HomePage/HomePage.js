@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../Navigation/Nav";
+import { UserContext } from "../../Context/UserContext";
 
 const HomePage = () => {
   let history = useHistory();
-  // let [account, setAccount] = useState({});
+  const { name } = React.useContext(UserContext);
   useEffect(() => {
-    let session = sessionStorage.getItem("account");
-    if (session) {
-      // setAccount(JSON.parse(session));
-    } else {
-      history.push("/login");
-    }
-  }, [history]);
+    console.log(">>>>>>", name);
+  }, []);
   return (
     <div>
       <Nav isShowNav={true} />

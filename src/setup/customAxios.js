@@ -6,6 +6,9 @@ const instance = axios.create({
   //   headers: { "X-Custom-Header": "foobar" },
 });
 instance.defaults.withCredentials = true;
+instance.defaults.headers.common[
+  "Authorization"
+] = `Bearer ${localStorage.getItem("jwt")}`;
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
@@ -31,8 +34,9 @@ instance.interceptors.response.use(
     const status = error?.response?.status || 500;
     switch (status) {
       case 401:
-        toast.error("Unauthorized the user");
-        return Promise.reject(error);
+        toast.error("Unauthorized the user from custom axios 401");
+        // return error.response.data;
+        return Promise.reject("from custom axios 401", error);
 
       case 403:
         toast.error("You don't have permission");

@@ -69,6 +69,9 @@ const handleUpdateUserApi = async (
     groupId,
   });
 };
+const getUserAccount = async () => {
+  return axios.get("/api/v1/account");
+};
 export {
   handleCreateAccountApi,
   handleLogin,
@@ -78,4 +81,5 @@ export {
   handleCreateUserApi,
   getGroup,
   handleUpdateUserApi,
+  getUserAccount,
 };
