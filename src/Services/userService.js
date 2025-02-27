@@ -72,6 +72,9 @@ const handleUpdateUserApi = async (
 const getUserAccount = async () => {
   return axios.get("/api/v1/account");
 };
+const handleLogout = () => {
+  return axios.get("/api/v1/logout");
+};
 export {
   handleCreateAccountApi,
   handleLogin,
@@ -82,4 +85,5 @@ export {
   getGroup,
   handleUpdateUserApi,
   getUserAccount,
+  handleLogout,
 };

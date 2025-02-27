@@ -49,7 +49,7 @@ const User = () => {
   const handlePageClick = async (event) => {
     setCurrentPage(+event.selected + 1);
   };
-  if (!name?.isAuthenticated) {
+  if (!name && !name.isAuthenticated) {
     return <Redirect to="/login" />;
   } else {
     return (

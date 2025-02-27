@@ -10,20 +10,18 @@ const UserProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    console.log("nameContext", name);
-
-    // handleGetUserAccount();
+    handleGetUserAccount();
   }, []);
   const handleGetUserAccount = async () => {
     let result = await getUserAccount();
     let data = {
       isAuthenticated: true,
-      token: data.access_token,
-      account: { ...data.roles, ...result.data.email },
+      token: result.data.access_token,
+      account: { ...result.roles, ...result.data.email },
       username: result.data.username,
     };
     if (result.errCode === 0) {
-      setName(result.data);
+      setName(data);
     }
   };
   const loginContext = (userData) => {
