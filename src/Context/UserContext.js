@@ -8,9 +8,20 @@ const UserProvider = ({ children }) => {
     account: {},
     username: "",
   });
-
   useEffect(() => {
-    handleGetUserAccount();
+    if (
+      window.location.pathname !== "/" &&
+      window.location.pathname !== "/login"
+    )
+      handleGetUserAccount();
+    else {
+      setName({
+        isAuthenticated: false,
+        token: "",
+        account: {},
+        username: "",
+      });
+    }
   }, []);
   const handleGetUserAccount = async () => {
     let result = await getUserAccount();

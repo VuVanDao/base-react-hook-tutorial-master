@@ -1,13 +1,4 @@
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Row,
-} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./Nav.scss";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
@@ -44,17 +35,17 @@ const NavHeader = (props) => {
                   <NavLink className="nav-link" to="/user">
                     User
                   </NavLink>
-
-                  <NavLink className="nav-link" to="/login">
-                    Login
-                  </NavLink>
                 </Nav>
 
                 <Nav className="">
-                  {name?.isAuthenticated && (
+                  {name?.isAuthenticated ? (
                     <Nav.Item className="nav-link btn">
                       Welcome {name.username}!!
                     </Nav.Item>
+                  ) : (
+                    <NavLink className="nav-link" to="/login">
+                      Login
+                    </NavLink>
                   )}
 
                   <Nav.Item className="nav-link btn">Theme</Nav.Item>
