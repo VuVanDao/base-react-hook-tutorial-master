@@ -35,11 +35,14 @@ const NavHeader = (props) => {
                   <NavLink className="nav-link" to="/user">
                     User
                   </NavLink>
+                  <NavLink className="nav-link" to="/roles">
+                    Roles
+                  </NavLink>
                 </Nav>
 
                 <Nav className="">
                   {name?.isAuthenticated ? (
-                    <Nav.Item className="nav-link btn">
+                    <Nav.Item className="nav-link ">
                       Welcome {name.username}!!
                     </Nav.Item>
                   ) : (
@@ -48,7 +51,7 @@ const NavHeader = (props) => {
                     </NavLink>
                   )}
 
-                  <Nav.Item className="nav-link btn">Theme</Nav.Item>
+                  <Nav.Item className="nav-link ">Theme</Nav.Item>
 
                   <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">

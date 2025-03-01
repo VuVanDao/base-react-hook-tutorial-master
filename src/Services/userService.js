@@ -75,6 +75,9 @@ const getUserAccount = async () => {
 const handleLogout = () => {
   return axios.get("/api/v1/logout");
 };
+const handleCreateRoles = (roles) => {
+  return axios.post("/api/v1/save-roles", roles);
+};
 export {
   handleCreateAccountApi,
   handleLogin,
@@ -86,4 +89,5 @@ export {
   handleUpdateUserApi,
   getUserAccount,
   handleLogout,
+  handleCreateRoles,
 };
