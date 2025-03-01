@@ -78,6 +78,12 @@ const handleLogout = () => {
 const handleCreateRoles = (roles) => {
   return axios.post("/api/v1/save-roles", roles);
 };
+const handleGetRoles = () => {
+  return axios.get("/api/v1/get-roles");
+};
+const handleDeleteRoles = (id) => {
+  return axios.post(`/api/v1/delete-roles?id=${id}`);
+};
 export {
   handleCreateAccountApi,
   handleLogin,
@@ -90,4 +96,6 @@ export {
   getUserAccount,
   handleLogout,
   handleCreateRoles,
+  handleGetRoles,
+  handleDeleteRoles,
 };

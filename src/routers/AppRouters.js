@@ -5,6 +5,7 @@ import Register from "../Components/Register/register";
 import Login from "../Components/Login/Login";
 import User from "../Components/User/user";
 import Roles from "../Components/Roles/Roles";
+
 const AppRouters = () => {
   return (
     <>
@@ -18,6 +19,7 @@ const AppRouters = () => {
         <Route path="/roles" exact>
           <Roles />
         </Route>
+
         <Route path="/login">
           <Login />
         </Route>
