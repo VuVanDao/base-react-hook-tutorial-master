@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import NavHeader from "../Navigation/Nav";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
@@ -9,10 +9,7 @@ const Roles = () => {
   let [listChild, setListChild] = useState([
     { uuId: uuidv4(), url: "", description: "" },
   ]);
-  const childRef = useRef();
-  const fetchGetAllRole = async () => {
-    await handleGetRoles();
-  };
+
   const handleAddMoreRole = () => {
     setListChild([...listChild, { uuId: uuidv4(), url: "", description: "" }]);
   };
@@ -44,7 +41,9 @@ const Roles = () => {
       toast.error("not complete ");
     }
   };
-
+  const fetchGetAllRole = async () => {
+    await handleGetRoles();
+  };
   const handleDeleteARow = (id) => {
     let _listChildClone = _.cloneDeep(listChild);
     _listChildClone = _listChildClone.filter((item) => item.uuId !== id);
@@ -67,14 +66,13 @@ const Roles = () => {
                   type="text"
                   className="form-control"
                   id="roles"
-                  aria-descriptioncribedby="emailHelp"
                   value={url}
                   onChange={(e) => handleOnChange(e.target.value, index, "url")}
                 />
               </div>
               <div className="mb-3 col-4">
                 <label htmlFor="exampleInputPassword1" className="form-label">
-                  descriptioncription
+                  description
                 </label>
                 <input
                   type="text"
@@ -118,7 +116,7 @@ const Roles = () => {
         </div>
         <hr />
       </div>
-      <AllRoles />
+      <AllRoles listChild={listChild} />
     </>
   );
 };

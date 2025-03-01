@@ -7,7 +7,7 @@ const TableRoles = (props) => {
   let [listRoles, setListRoles] = useState([]);
   useEffect(() => {
     fetchGetAllRole();
-  }, [listRoles]);
+  }, []);
 
   const fetchGetAllRole = async () => {
     let result = await handleGetRoles();

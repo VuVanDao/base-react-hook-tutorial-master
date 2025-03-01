@@ -84,6 +84,9 @@ const handleGetRoles = () => {
 const handleDeleteRoles = (id) => {
   return axios.post(`/api/v1/delete-roles?id=${id}`);
 };
+const handleGetRolesByGroup = (groupId) => {
+  return axios.get(`/api/v1/get-roles-by-group?id=${groupId}`);
+};
 export {
   handleCreateAccountApi,
   handleLogin,
@@ -98,4 +101,5 @@ export {
   handleCreateRoles,
   handleGetRoles,
   handleDeleteRoles,
+  handleGetRolesByGroup,
 };

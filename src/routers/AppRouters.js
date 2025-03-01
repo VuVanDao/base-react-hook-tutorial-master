@@ -5,6 +5,7 @@ import Register from "../Components/Register/register";
 import Login from "../Components/Login/Login";
 import User from "../Components/User/user";
 import Roles from "../Components/Roles/Roles";
+import GroupRoles from "../Components/GroupRoles/GroupRoles";
 
 const AppRouters = () => {
   return (
@@ -19,7 +20,9 @@ const AppRouters = () => {
         <Route path="/roles" exact>
           <Roles />
         </Route>
-
+        <Route path="/group-roles" exact>
+          <GroupRoles />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
