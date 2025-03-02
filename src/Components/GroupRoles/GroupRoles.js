@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import NavHeader from "../Navigation/Nav";
 import {
   getGroup,
+  handleGetAssignByGroup,
   handleGetRoles,
   handleGetRolesByGroup,
 } from "../../Services/userService";
 import { Col, Form, Row } from "react-bootstrap";
 import _ from "lodash";
+import { toast } from "react-toastify";
 
 const GroupRoles = () => {
   let [listGroup, setListGroup] = useState([]);
   let [listRoles, setListRoles] = useState([]);
+  let [groupSelected, setGroupSelected] = useState(0);
   let [listRolesAssigned, setListRolesAssigned] = useState([]);
 
   useEffect(() => {
@@ -30,11 +33,10 @@ const GroupRoles = () => {
     }
   };
   const handleOnChange = async (value, id) => {
+    setGroupSelected(value);
     let result = await handleGetRolesByGroup(value);
     if (result.errCode === 0) {
-      //   console.log("result", result.data);
       let data = handleBuildDataRoles(result.data, listRoles);
-      console.log("data", data);
       if (data && data.length > 0) {
         setListRolesAssigned(data);
       }
@@ -42,9 +44,6 @@ const GroupRoles = () => {
   };
   const handleBuildDataRoles = (RolesByGroup, AllRoles) => {
     let result = [];
-    // console.log("RolesByGroup", RolesByGroup);
-    // console.log("AllRoles", AllRoles);
-
     if (RolesByGroup || AllRoles) {
       AllRoles.map((item, index) => {
         let object = {};
@@ -73,13 +72,28 @@ const GroupRoles = () => {
       !_listRolesAssigned[index].isAssigned;
     setListRolesAssigned(_listRolesAssigned);
   };
-  const handleSubmitSelectedRoles = () => {};
+  const handleSubmitSelectedRoles = async () => {
+    let data = {};
+    data.groupId = groupSelected;
+    let roleId = listRolesAssigned.filter((item) => item.isAssigned === true);
+    data.roleId = roleId.map((item) => ({
+      groupId: +groupSelected,
+      roleId: item.id,
+    }));
+    console.log(">>", data.groupId, data.roleId);
+    let result = await handleGetAssignByGroup(data);
+    if (result.errCode === 0) {
+      toast.success(result.errMessage);
+    } else {
+      toast.danger(result.errMessage);
+    }
+  };
   return (
     <div className="container">
       <NavHeader isShowNav={true} />
       <p>Select roles</p>
       <div>
-        <Form>
+        <div>
           <Row>
             <Form.Group as={Col}>
               <Form.Label>Select group</Form.Label>
@@ -94,9 +108,16 @@ const GroupRoles = () => {
                     </option>
                   ))}
               </Form.Select>
-              <p className="mt-3">
-                <button className="btn btn-outline-primary">aa</button>
-              </p>
+              {groupSelected > 0 && (
+                <p className="mt-3">
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={() => handleSubmitSelectedRoles()}
+                  >
+                    aa
+                  </button>
+                </p>
+              )}
             </Form.Group>
 
             <Form.Group as={Col}>
@@ -118,7 +139,7 @@ const GroupRoles = () => {
                 )}
             </Form.Group>
           </Row>
-        </Form>
+        </div>
       </div>
     </div>
   );
